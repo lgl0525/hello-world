@@ -1,0 +1,34 @@
+
+#server  config
+#server.port=8080
+server:
+  port: 8080
+#datasource config
+
+#spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+#spring.datasource.url=jdbc:oracle:thin:@127.0.0.1:1521:ORCL
+#spring.datasource.username=scott
+#spring.datasource.password=tiger
+#spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+#spring.datasource
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@127.0.0.1:1521:ORCL
+    username: tourism
+    password: tourism
+    type: com.alibaba.druid.pool.DruidDataSource
+  http:
+    multipart:
+      max-file-size: 10Mb
+  thymeleaf:
+    mode: LEGACYHTML5
+#mybatis config
+
+#mybatis.mapper-locations=classpath:com/qf/j1808/mapper/*.xml
+#mybatis.type-aliases-package=com.qf.j1808.pojo
+mybatis:
+  mapper-locations: classpath:com/qf/mapper/*.xml
+  type-aliases-package: com.qf.pojo
+#  config-location:

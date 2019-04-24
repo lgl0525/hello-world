@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.mapper.TbStrategyMapper" >
+  <resultMap id="BaseResultMap" type="com.qf.pojo.TbStrategy" >
+    <id column="STR_ID" property="strId" jdbcType="DECIMAL" />
+    <result column="STR_TITLE" property="strTitle" jdbcType="VARCHAR" />
+    <result column="SCENIC_SPOT" property="scenicSpot" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="APPROPRIATE_CROWD" property="appropriateCrowd" jdbcType="VARCHAR" />
+    <result column="APPROPRIATE_TIME" property="appropriateTime" jdbcType="VARCHAR" />
+    <result column="NECESSARY_EQUIPMENT" property="necessaryEquipment" jdbcType="VARCHAR" />
+    <result column="MATTERS_NEED_ATTENTION" property="mattersNeedAttention" jdbcType="VARCHAR" />
+    <result column="PARTICULARS" property="particulars" jdbcType="VARCHAR" />
+    <result column="IMG" property="img" jdbcType="VARCHAR" />
+    <result column="CHENGSHI" property="chengshi" jdbcType="VARCHAR" />
+    <result column="FABUTIME" property="fabutime" jdbcType="VARCHAR" />
+    <result column="FABUREN" property="faburen" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    STR_ID, STR_TITLE, SCENIC_SPOT, TYPE, APPROPRIATE_CROWD, APPROPRIATE_TIME, NECESSARY_EQUIPMENT, 
+    MATTERS_NEED_ATTENTION, PARTICULARS, IMG, CHENGSHI, FABUTIME, FABUREN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qf.pojo.TbStrategyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TB_STRATEGY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_STRATEGY
+    where STR_ID = #{strId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_STRATEGY
+    where STR_ID = #{strId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qf.pojo.TbStrategyExample" >
+    delete from TB_STRATEGY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qf.pojo.TbStrategy" >
+  <selectKey keyProperty="strId" keyColumn="STR_ID" order="BEFORE" resultType="java.math.BigDecimal">
+   select tb_strategy_seq.nextval from dual
+  </selectKey>
+    insert into TB_STRATEGY (STR_ID, STR_TITLE, SCENIC_SPOT, 
+      TYPE, APPROPRIATE_CROWD, APPROPRIATE_TIME, 
+      NECESSARY_EQUIPMENT, MATTERS_NEED_ATTENTION, 
+      PARTICULARS, IMG, CHENGSHI, 
+      FABUTIME, FABUREN)
+    values (#{strId,jdbcType=DECIMAL}, #{strTitle,jdbcType=VARCHAR}, #{scenicSpot,jdbcType=VARCHAR}, 
+      #{type,jdbcType=DECIMAL}, #{appropriateCrowd,jdbcType=VARCHAR}, #{appropriateTime,jdbcType=VARCHAR}, 
+      #{necessaryEquipment,jdbcType=VARCHAR}, #{mattersNeedAttention,jdbcType=VARCHAR}, 
+      #{particulars,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{chengshi,jdbcType=VARCHAR}, 
+      #{fabutime,jdbcType=VARCHAR}, #{faburen,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.pojo.TbStrategy" >
+    insert into TB_STRATEGY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="strId != null" >
+        STR_ID,
+      </if>
+      <if test="strTitle != null" >
+        STR_TITLE,
+      </if>
+      <if test="scenicSpot != null" >
+        SCENIC_SPOT,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="appropriateCrowd != null" >
+        APPROPRIATE_CROWD,
+      </if>
+      <if test="appropriateTime != null" >
+        APPROPRIATE_TIME,
+      </if>
+      <if test="necessaryEquipment != null" >
+        NECESSARY_EQUIPMENT,
+      </if>
+      <if test="mattersNeedAttention != null" >
+        MATTERS_NEED_ATTENTION,
+      </if>
+      <if test="particulars != null" >
+        PARTICULARS,
+      </if>
+      <if test="img != null" >
+        IMG,
+      </if>
+      <if test="chengshi != null" >
+        CHENGSHI,
+      </if>
+      <if test="fabutime != null" >
+        FABUTIME,
+      </if>
+      <if test="faburen != null" >
+        FABUREN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="strId != null" >
+        #{strId,jdbcType=DECIMAL},
+      </if>
+      <if test="strTitle != null" >
+        #{strTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicSpot != null" >
+        #{scenicSpot,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="appropriateCrowd != null" >
+        #{appropriateCrowd,jdbcType=VARCHAR},
+      </if>
+      <if test="appropriateTime != null" >
+        #{appropriateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="necessaryEquipment != null" >
+        #{necessaryEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="mattersNeedAttention != null" >
+        #{mattersNeedAttention,jdbcType=VARCHAR},
+      </if>
+      <if test="particulars != null" >
+        #{particulars,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="chengshi != null" >
+        #{chengshi,jdbcType=VARCHAR},
+      </if>
+      <if test="fabutime != null" >
+        #{fabutime,jdbcType=VARCHAR},
+      </if>
+      <if test="faburen != null" >
+        #{faburen,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qf.pojo.TbStrategyExample" resultType="java.lang.Integer" >
+    select count(*) from TB_STRATEGY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TB_STRATEGY
+    <set >
+      <if test="record.strId != null" >
+        STR_ID = #{record.strId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.strTitle != null" >
+        STR_TITLE = #{record.strTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scenicSpot != null" >
+        SCENIC_SPOT = #{record.scenicSpot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=DECIMAL},
+      </if>
+      <if test="record.appropriateCrowd != null" >
+        APPROPRIATE_CROWD = #{record.appropriateCrowd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appropriateTime != null" >
+        APPROPRIATE_TIME = #{record.appropriateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.necessaryEquipment != null" >
+        NECESSARY_EQUIPMENT = #{record.necessaryEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mattersNeedAttention != null" >
+        MATTERS_NEED_ATTENTION = #{record.mattersNeedAttention,jdbcType=VARCHAR},
+      </if>
+      <if test="record.particulars != null" >
+        PARTICULARS = #{record.particulars,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null" >
+        IMG = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chengshi != null" >
+        CHENGSHI = #{record.chengshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fabutime != null" >
+        FABUTIME = #{record.fabutime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faburen != null" >
+        FABUREN = #{record.faburen,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TB_STRATEGY
+    set STR_ID = #{record.strId,jdbcType=DECIMAL},
+      STR_TITLE = #{record.strTitle,jdbcType=VARCHAR},
+      SCENIC_SPOT = #{record.scenicSpot,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=DECIMAL},
+      APPROPRIATE_CROWD = #{record.appropriateCrowd,jdbcType=VARCHAR},
+      APPROPRIATE_TIME = #{record.appropriateTime,jdbcType=VARCHAR},
+      NECESSARY_EQUIPMENT = #{record.necessaryEquipment,jdbcType=VARCHAR},
+      MATTERS_NEED_ATTENTION = #{record.mattersNeedAttention,jdbcType=VARCHAR},
+      PARTICULARS = #{record.particulars,jdbcType=VARCHAR},
+      IMG = #{record.img,jdbcType=VARCHAR},
+      CHENGSHI = #{record.chengshi,jdbcType=VARCHAR},
+      FABUTIME = #{record.fabutime,jdbcType=VARCHAR},
+      FABUREN = #{record.faburen,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.pojo.TbStrategy" >
+    update TB_STRATEGY
+    <set >
+      <if test="strTitle != null" >
+        STR_TITLE = #{strTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicSpot != null" >
+        SCENIC_SPOT = #{scenicSpot,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="appropriateCrowd != null" >
+        APPROPRIATE_CROWD = #{appropriateCrowd,jdbcType=VARCHAR},
+      </if>
+      <if test="appropriateTime != null" >
+        APPROPRIATE_TIME = #{appropriateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="necessaryEquipment != null" >
+        NECESSARY_EQUIPMENT = #{necessaryEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="mattersNeedAttention != null" >
+        MATTERS_NEED_ATTENTION = #{mattersNeedAttention,jdbcType=VARCHAR},
+      </if>
+      <if test="particulars != null" >
+        PARTICULARS = #{particulars,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        IMG = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="chengshi != null" >
+        CHENGSHI = #{chengshi,jdbcType=VARCHAR},
+      </if>
+      <if test="fabutime != null" >
+        FABUTIME = #{fabutime,jdbcType=VARCHAR},
+      </if>
+      <if test="faburen != null" >
+        FABUREN = #{faburen,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where STR_ID = #{strId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.pojo.TbStrategy" >
+    update TB_STRATEGY
+    set STR_TITLE = #{strTitle,jdbcType=VARCHAR},
+      SCENIC_SPOT = #{scenicSpot,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=DECIMAL},
+      APPROPRIATE_CROWD = #{appropriateCrowd,jdbcType=VARCHAR},
+      APPROPRIATE_TIME = #{appropriateTime,jdbcType=VARCHAR},
+      NECESSARY_EQUIPMENT = #{necessaryEquipment,jdbcType=VARCHAR},
+      MATTERS_NEED_ATTENTION = #{mattersNeedAttention,jdbcType=VARCHAR},
+      PARTICULARS = #{particulars,jdbcType=VARCHAR},
+      IMG = #{img,jdbcType=VARCHAR},
+      CHENGSHI = #{chengshi,jdbcType=VARCHAR},
+      FABUTIME = #{fabutime,jdbcType=VARCHAR},
+      FABUREN = #{faburen,jdbcType=VARCHAR}
+    where STR_ID = #{strId,jdbcType=DECIMAL}
+  </update>
+</mapper>
